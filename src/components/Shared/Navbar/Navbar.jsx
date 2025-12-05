@@ -64,21 +64,21 @@ const Navbar = () => {
                     </Link>
 
                     <Link
-                      to='/'
+                      to='/all-loans'
                       className='block px-4 py-3 hover:bg-neutral-100 transition font-semibold'
                     >
                       All-Loans
                     </Link>
 
                     <Link
-                      to='/'
+                      to='/about-us'
                       className='block px-4 py-3 hover:bg-neutral-100 transition font-semibold'
                     >
                       About Us
                     </Link>
 
                     <Link
-                      to='/'
+                      to='/contact-us'
                       className='block px-4 py-3 hover:bg-neutral-100 transition font-semibold'
                     >
                       Contact Us

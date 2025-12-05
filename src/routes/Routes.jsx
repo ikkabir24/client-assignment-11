@@ -14,6 +14,9 @@ import MyInventory from '../pages/Dashboard/Seller/MyInventory'
 import ManageOrders from '../pages/Dashboard/Seller/ManageOrders'
 import MyOrders from '../pages/Dashboard/Customer/MyOrders'
 import { createBrowserRouter } from 'react-router'
+import AllLoans from '../pages/AllLoans/AllLoans'
+import AboutUs from '../pages/AboutUs/AboutUs'
+import ContactUs from '../pages/ContactUs/ContactUs'
 
 export const router = createBrowserRouter([
   {
@@ -24,6 +27,18 @@ export const router = createBrowserRouter([
       {
         path: '/',
         element: <Home />,
+      },
+      {
+        path: '/all-loans',
+        element: <AllLoans></AllLoans>
+      },
+      {
+        path: '/about-us',
+        element: <AboutUs></AboutUs>
+      },
+      {
+        path: '/contact-us',
+        element: <ContactUs></ContactUs>
       },
       {
         path: '/plant/:id',
