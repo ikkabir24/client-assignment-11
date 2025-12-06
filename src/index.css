@@ -4,3 +4,9 @@
 }
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+
+a.active {
+  background-color: gray;
+  color: white;
+}

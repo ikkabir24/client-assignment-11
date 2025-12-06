@@ -2,21 +2,18 @@ import Home from '../pages/Home/Home'
 import ErrorPage from '../pages/ErrorPage'
 import Login from '../pages/Login/Login'
 import SignUp from '../pages/SignUp/SignUp'
-import PlantDetails from '../pages/PlantDetails/PlantDetails'
 import PrivateRoute from './PrivateRoute'
 import DashboardLayout from '../layouts/DashboardLayout'
-import AddPlant from '../pages/Dashboard/Seller/AddPlant'
-import ManageUsers from '../pages/Dashboard/Admin/ManageUsers'
-import Profile from '../pages/Dashboard/Common/Profile'
-import Statistics from '../pages/Dashboard/Common/Statistics'
-import MainLayout from '../layouts/MainLayout'
-import MyInventory from '../pages/Dashboard/Seller/MyInventory'
-import ManageOrders from '../pages/Dashboard/Seller/ManageOrders'
-import MyOrders from '../pages/Dashboard/Customer/MyOrders'
 import { createBrowserRouter } from 'react-router'
+import MainLayout from '../layouts/MainLayout'
 import AllLoans from '../pages/AllLoans/AllLoans'
 import AboutUs from '../pages/AboutUs/AboutUs'
 import ContactUs from '../pages/ContactUs/ContactUs'
+import MyLoans from '../pages/Dashboard/MyLoans/MyLoans'
+import AddLoans from '../pages/Dashboard/AddLoans/AddLoans'
+import LoanDetails from '../pages/AllLoans/LoanDetails'
+import ApplyForLoan from '../pages/ApplyForLoan/ApplyForLoan'
+import UserProfile from '../pages/Dashboard/UserProfile/UserProfile'
 
 export const router = createBrowserRouter([
   {
@@ -30,19 +27,27 @@ export const router = createBrowserRouter([
       },
       {
         path: '/all-loans',
-        element: <AllLoans></AllLoans>
+        Component: AllLoans
+      },
+      {
+        path: '/loan/:id',
+        element: <PrivateRoute>
+          <LoanDetails></LoanDetails>
+        </PrivateRoute>
+      },
+      {
+        path: '/apply/:id',
+        element: <PrivateRoute>
+          <ApplyForLoan></ApplyForLoan>
+        </PrivateRoute>
       },
       {
         path: '/about-us',
-        element: <AboutUs></AboutUs>
+        Component: AboutUs
       },
       {
         path: '/contact-us',
-        element: <ContactUs></ContactUs>
-      },
-      {
-        path: '/plant/:id',
-        element: <PlantDetails />,
+        Component: ContactUs
       },
     ],
   },
@@ -50,64 +55,24 @@ export const router = createBrowserRouter([
   { path: '/signup', element: <SignUp /> },
   {
     path: '/dashboard',
-    element: (
-      <PrivateRoute>
-        <DashboardLayout />
-      </PrivateRoute>
-    ),
+    element: <PrivateRoute>
+      <DashboardLayout />
+    </PrivateRoute>
+    ,
     children: [
       {
         index: true,
-        element: (
-          <PrivateRoute>
-            <Statistics />
-          </PrivateRoute>
-        ),
+        Component: UserProfile
       },
       {
-        path: 'add-plant',
-        element: (
-          <PrivateRoute>
-            <AddPlant />
-          </PrivateRoute>
-        ),
+        path: '/dashboard/my-loans',
+        Component: MyLoans
       },
       {
-        path: 'my-inventory',
-        element: (
-          <PrivateRoute>
-            <MyInventory />
-          </PrivateRoute>
-        ),
+        path: '/dashboard/add-loans',
+        Component: AddLoans
       },
-      {
-        path: 'manage-users',
-        element: (
-          <PrivateRoute>
-            <ManageUsers />
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: 'profile',
-        element: (
-          <PrivateRoute>
-            <Profile />
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: 'my-orders',
-        element: (
-          <PrivateRoute>
-            <MyOrders />
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: 'manage-orders',
-        element: <ManageOrders />,
-      },
+      
     ],
   },
 ])

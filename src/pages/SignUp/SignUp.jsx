@@ -3,6 +3,7 @@ import { FcGoogle } from 'react-icons/fc'
 import useAuth from '../../hooks/useAuth'
 import { toast } from 'react-hot-toast'
 import { TbFidgetSpinner } from 'react-icons/tb'
+import { saveOrUpdateUser } from '../../utils'
 
 const SignUp = () => {
   const { createUser, updateUserProfile, signInWithGoogle, loading } = useAuth()
@@ -17,15 +18,18 @@ const SignUp = () => {
     const name = form.name.value
     const email = form.email.value
     const password = form.password.value
+    const photoURL = form.photoURL.value
 
     try {
       //2. User Registration
       const result = await createUser(email, password)
 
+      await saveOrUpdateUser({ name, email, image: photoURL })
+
       //3. Save username & profile photo
       await updateUserProfile(
         name,
-        'https://lh3.googleusercontent.com/a/ACg8ocKUMU3XIX-JSUB80Gj_bYIWfYudpibgdwZE1xqmAGxHASgdvCZZ=s96-c'
+        photoURL
       )
       console.log(result)
 
@@ -41,7 +45,13 @@ const SignUp = () => {
   const handleGoogleSignIn = async () => {
     try {
       //User Registration using google
-      await signInWithGoogle()
+      const { user } = await signInWithGoogle()
+
+      await saveOrUpdateUser({ 
+        name: user?.displayName, 
+        email: user?.email, 
+        image: user?.photoURL 
+      })
 
       navigate(from, { replace: true })
       toast.success('Signup Successful')
@@ -86,23 +96,12 @@ const SignUp = () => {
                 Profile Image
               </label>
               <input
-                name='image'
-                type='file'
-                id='image'
-                accept='image/*'
-                className='block w-full text-sm text-gray-500
-      file:mr-4 file:py-2 file:px-4
-      file:rounded-md file:border-0
-      file:text-sm file:font-semibold
-      file:bg-lime-50 file:text-lime-700
-      hover:file:bg-lime-100
-      bg-gray-100 border border-dashed border-lime-300 rounded-md cursor-pointer
-      focus:outline-none focus:ring-2 focus:ring-lime-400 focus:border-lime-400
-      py-2'
+                type='text'
+                name='photoURL'
+                placeholder='Enter Your Photo URL'
+                className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-lime-500 bg-gray-200 text-gray-900'
+                data-temp-mail-org='0'
               />
-              <p className='mt-1 text-xs text-gray-400'>
-                PNG, JPG or JPEG (max 2MB)
-              </p>
             </div>
             <div>
               <label htmlFor='email' className='block mb-2 text-sm'>
