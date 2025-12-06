@@ -1,46 +1,70 @@
-import { useForm } from "react-hook-form";
-import LoadingSpinner from "../../../components/Shared/LoadingSpinner";
-import Swal from "sweetalert2";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import useAuth from "../../../hooks/useAuth";
+import React from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { useParams } from 'react-router';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import { useForm } from 'react-hook-form';
+import LoadingSpinner from '../../../components/Shared/LoadingSpinner';
+import useAuth from '../../../hooks/useAuth';
+import Swal from 'sweetalert2';
 
-const AddLoans = () => {
-    const { user, loading } = useAuth();
-    const { register, handleSubmit, reset } = useForm();
+const UpdateLoan = () => {
+
+    const { id } = useParams();
     const axiosSecure = useAxiosSecure();
+    const { loading } = useAuth();
 
-    const onSubmit = async (data) => {
-        console.log(data);
-        data.createdBy = user?.email;
+    const { data: loan = [], isLoading } = useQuery({
+        queryKey: ['get-data', id],
+        queryFn: async () => {
+            const result = await axiosSecure(`/loan/${id}`)
+            return result.data;
+        }
+    });
+    console.log(loan);
+
+    const { register, handleSubmit } = useForm({
+        defaultValues: {
+            title: loan.title,
+            description: loan.description,
+            category: loan.category,
+            interestRate: loan.interestRate,
+            maxLimit: loan.maxLimit,
+            requiredDocuments: loan.requiredDocuments,
+            emiPlans: loan.emiPlans,
+            imageURL: loan.imageURL,
+            showOnHome: loan.showOnHome
+        }
+    })
+
+    const onSubmit = (data) => {
 
         Swal.fire({
-            title: "Are you sure you want to add the loan scheme?",
+            title: "Are you sure you want to update the loan scheme?",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "Create"
+            confirmButtonText: "Update"
         }).then((result) => {
             if (result.isConfirmed) {
                 // save the loan package in the db
-                axiosSecure.post('/add-loan', data)
-                    .then(res => {
-                        console.log(res.data);
-                        reset();
+                axiosSecure.patch(`/update-loan/${id}`, data)
+                    .then(() => {
                         Swal.fire({
-                            title: "Created Successfully..!",
+                            title: "Updated Successfully..!",
                             icon: "success"
                         });
                     })
             }
         });
-    };
 
-    if (loading) return <LoadingSpinner></LoadingSpinner>
+    }
+
+    if (isLoading || loading) return <LoadingSpinner></LoadingSpinner>
     return (
         <div className="max-w-4xl mx-auto p-6 bg-base-200 rounded-xl shadow-md">
             <h2 className="text-xl font-semibold mb-6">
-                Add New Loan
+                Update Loan
             </h2>
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
@@ -174,11 +198,11 @@ const AddLoans = () => {
                     type="submit"
                     className="btn btn-primary w-full text-lg"
                 >
-                    Add Loan
+                    Update Loan
                 </button>
             </form>
         </div>
     );
 };
 
-export default AddLoans;
+export default UpdateLoan;

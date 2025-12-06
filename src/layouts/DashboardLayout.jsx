@@ -1,9 +1,13 @@
 import { Link, NavLink, Outlet } from 'react-router'
 import { GrMoney } from "react-icons/gr";
-import { MdAddTask } from "react-icons/md";
+import { MdAddTask, MdManageSearch } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
+import useRole from '../hooks/useRole';
 
 const DashboardLayout = () => {
+
+  const [role, isRoleLoading] = useRole();
+
   return (
     <div className="mx-auto drawer lg:drawer-open">
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
@@ -35,32 +39,47 @@ const DashboardLayout = () => {
               </Link>
             </li>
 
-            
+
             {/* user profile */}
             <li>
-              <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" to={'/dashboard'} data-tip="User Profile">
+              <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" to={'/dashboard/user-profile'} data-tip="User Profile">
                 <CgProfile className='my-1.5 inline-block size-4' />
                 <span className="is-drawer-close:hidden">User Profile</span>
               </NavLink>
             </li>
 
 
-            {/* our dashboard links */}
-
-            <li>
-              <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" to={'/dashboard/my-loans'} data-tip="My Loans">
-                <GrMoney className='my-1.5 inline-block size-4' />
-                <span className="is-drawer-close:hidden">My Loans</span>
-              </NavLink>
-            </li>
+            {/* my loans */}
+            {
+              role === 'borrower' &&
+              <li>
+                <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" to={'/dashboard/my-loans'} data-tip="My Loans">
+                  <GrMoney className='my-1.5 inline-block size-4' />
+                  <span className="is-drawer-close:hidden">My Loans</span>
+                </NavLink>
+              </li>
+            }
 
             {/* add loans: manager route */}
-            <li>
-              <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" to={'/dashboard/add-loans'} data-tip="Add Loans">
-                <MdAddTask className='my-1.5 inline-block size-4' />
-                <span className="is-drawer-close:hidden">Add Loans</span>
-              </NavLink>
-            </li>
+            {
+              role === 'manager' &&
+              <li>
+                <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" to={'/dashboard/add-loans'} data-tip="Add Loans">
+                  <MdAddTask className='my-1.5 inline-block size-4' />
+                  <span className="is-drawer-close:hidden">Add Loans</span>
+                </NavLink>
+              </li>
+            }
+            {/* manage loans */}
+            {
+              role === 'manager' &&
+              <li>
+                <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" to={'/dashboard/manage-loans'} data-tip="Manage Loans">
+                  <MdManageSearch className='my-1.5 inline-block size-4' />
+                  <span className="is-drawer-close:hidden">Manage Loans</span>
+                </NavLink>
+              </li>
+            }
 
           </ul>
         </div>
