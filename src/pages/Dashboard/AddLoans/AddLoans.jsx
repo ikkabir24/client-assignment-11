@@ -146,7 +146,7 @@ const AddLoans = () => {
                 {/* Image Upload */}
                 <div className="form-control">
                     <label className="label">
-                        <span className="label-text font-medium">Loan Image</span>
+                        <span className="label-text font-medium">Loan Image URL</span>
                     </label>
                     <input
                         type="text"

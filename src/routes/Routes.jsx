@@ -19,6 +19,8 @@ import UpdateLoan from '../pages/Dashboard/ManageLoans/UpdateLoan'
 import PendingApplications from '../pages/Dashboard/PendingApplications/PendingApplications'
 import ApprovedLoans from '../pages/Dashboard/ApprovedLoans/ApprovedLoans'
 import ApplicationDetails from '../pages/Dashboard/ApplicationDetails/ApplicationDetails'
+import ManageUsers from '../pages/Dashboard/ManageUsers/ManageUsers'
+import AllLoansForAdmin from '../pages/Dashboard/AllLoansForAdmin/AllLoansForAdmin'
 
 export const router = createBrowserRouter([
   {
@@ -97,6 +99,15 @@ export const router = createBrowserRouter([
         path: '/dashboard/approved-loans',
         Component: ApprovedLoans
       },
+      // admin routes
+      {
+        path: '/dashboard/manage-users',
+        Component: ManageUsers
+      },
+      {
+        path: '/dashboard/all-loan',
+        Component: AllLoansForAdmin
+      }
       
     ],
   },

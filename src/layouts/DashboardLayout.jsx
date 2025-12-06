@@ -6,6 +6,8 @@ import useRole from '../hooks/useRole';
 import { MdOutlinePendingActions } from "react-icons/md";
 import { MdHistoryEdu } from "react-icons/md";
 import LoadingSpinner from '../components/Shared/LoadingSpinner';
+import { FaUsersGear } from "react-icons/fa6";
+import { SlDocs } from "react-icons/sl";
 
 const DashboardLayout = () => {
 
@@ -101,6 +103,28 @@ const DashboardLayout = () => {
                 <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" to={'/dashboard/approved-loans'} data-tip="Approved Applications">
                   <MdHistoryEdu className='my-1.5 inline-block size-4' />
                   <span className="is-drawer-close:hidden">Approved Applications</span>
+                </NavLink>
+              </li>
+            }
+
+            {/* <--admin section--> */}
+
+            {/* approved application */}
+            {
+              role === 'admin' &&
+              <li>
+                <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" to={'/dashboard/manage-users'} data-tip="Manage Users">
+                  <FaUsersGear className='my-1.5 inline-block size-4' />
+                  <span className="is-drawer-close:hidden">Manage Users</span>
+                </NavLink>
+              </li>
+            }
+            {
+              role === 'admin' &&
+              <li>
+                <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" to={'/dashboard/all-loan'} data-tip="All Loans">
+                  <SlDocs className='my-1.5 inline-block size-4' />
+                  <span className="is-drawer-close:hidden">All Loans</span>
                 </NavLink>
               </li>
             }
