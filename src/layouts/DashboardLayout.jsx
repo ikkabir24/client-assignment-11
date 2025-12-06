@@ -3,11 +3,15 @@ import { GrMoney } from "react-icons/gr";
 import { MdAddTask, MdManageSearch } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import useRole from '../hooks/useRole';
+import { MdOutlinePendingActions } from "react-icons/md";
+import { MdHistoryEdu } from "react-icons/md";
+import LoadingSpinner from '../components/Shared/LoadingSpinner';
 
 const DashboardLayout = () => {
 
   const [role, isRoleLoading] = useRole();
 
+  isRoleLoading && <LoadingSpinner></LoadingSpinner>
   return (
     <div className="mx-auto drawer lg:drawer-open">
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
@@ -77,6 +81,26 @@ const DashboardLayout = () => {
                 <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" to={'/dashboard/manage-loans'} data-tip="Manage Loans">
                   <MdManageSearch className='my-1.5 inline-block size-4' />
                   <span className="is-drawer-close:hidden">Manage Loans</span>
+                </NavLink>
+              </li>
+            }
+            {/* manage pending application */}
+            {
+              role === 'manager' &&
+              <li>
+                <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" to={'/dashboard/pending-loans'} data-tip="Pending Applications">
+                  <MdOutlinePendingActions className='my-1.5 inline-block size-4' />
+                  <span className="is-drawer-close:hidden">Pending Applications</span>
+                </NavLink>
+              </li>
+            }
+            {/* approved application */}
+            {
+              role === 'manager' &&
+              <li>
+                <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" to={'/dashboard/approved-loans'} data-tip="Approved Applications">
+                  <MdHistoryEdu className='my-1.5 inline-block size-4' />
+                  <span className="is-drawer-close:hidden">Approved Applications</span>
                 </NavLink>
               </li>
             }

@@ -21,7 +21,7 @@ const Navbar = () => {
   }
 
   return (
-    <div className='w-full bg-base-200 shadow-sm'>
+    <div className='w-full shadow-sm'>
       <div className='py-4 '>
         <Container>
           <div className='flex flex-row  items-center justify-between gap-3 md:gap-0'>
@@ -54,7 +54,7 @@ const Navbar = () => {
                 </div>
               </div>
               {isOpen && (
-                <div className='absolute rounded-xl bg-base-100 shadow-md w-[40vw] md:w-[10vw] overflow-hidden right-0 top-12 text-sm z-10'>
+                <div className='absolute rounded-xl shadow-md w-[40vw]  hover:text-black bg-gray-300 md:w-[10vw] overflow-hidden right-0 top-12 text-sm z-10'>
                   <div className='flex flex-col cursor-pointer'>
                     <Link
                       to='/'
@@ -85,38 +85,38 @@ const Navbar = () => {
                     </Link>
 
 
-                    {user ? (
-                      <>
-                        <Link
-                          to='/dashboard'
-                          className='px-4 py-3 hover:bg-neutral-100 transition font-semibold'
-                        >
-                          Dashboard
-                        </Link>
-                        <div
-                          onClick={logOut}
-                          className='px-4 py-3 hover:bg-neutral-100 transition font-semibold cursor-pointer'
-                        >
-                          Logout
-                        </div>
-                      </>
-                    ) : (
-                      <>
-                        <Link
-                          to='/login'
-                          className='px-4 py-3 hover:bg-neutral-100 transition font-semibold'
-                        >
-                          Login
-                        </Link>
-                        <Link
-                          to='/signup'
-                          className='px-4 py-3 hover:bg-neutral-100 transition font-semibold'
-                        >
-                          Sign Up
-                        </Link>
+                    {
+                      user
+                        ? <>
+                          <Link
+                            to='/dashboard/user-profile'
+                            className='px-4 py-3 hover:bg-neutral-100 transition font-semibold'
+                          >
+                            Dashboard
+                          </Link>
+                          <div
+                            onClick={logOut}
+                            className='px-4 py-3 hover:bg-neutral-100 transition font-semibold cursor-pointer'
+                          >
+                            Logout
+                          </div>
+                        </>
+                        : <>
+                          <Link
+                            to='/login'
+                            className='px-4 py-3 hover:bg-neutral-100 transition font-semibold'
+                          >
+                            Login
+                          </Link>
+                          <Link
+                            to='/signup'
+                            className='px-4 py-3 hover:bg-neutral-100 transition font-semibold'
+                          >
+                            Sign Up
+                          </Link>
 
-                      </>
-                    )}
+                        </>
+                    }
                     <div className='block px-4 py-3 hover:bg-neutral-100 transition font-semibold'
                     >
                       <input

@@ -8,7 +8,7 @@ const LoanDetails = () => {
 
     const {id} = useParams();
 
-    const {data: loan = {}, isLoading, refetch} = useQuery({
+    const {data: loan = {}, isLoading} = useQuery({
         queryKey: ['loan', id],
         queryFn: async ()=>{
             const result = await axios(`${import.meta.env.VITE_API_URL}/loan/${id}`)
