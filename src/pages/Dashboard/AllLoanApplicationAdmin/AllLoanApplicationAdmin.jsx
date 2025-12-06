@@ -1,59 +1,30 @@
-import React from 'react';
+import { format } from 'date-fns';
+import React, { useState } from 'react';
+import { Link } from 'react-router';
+import LoadingSpinner from '../../../components/Shared/LoadingSpinner';
+import useAuth from '../../../hooks/useAuth';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
-import useAuth from '../../../hooks/useAuth';
-import LoadingSpinner from '../../../components/Shared/LoadingSpinner';
-import { format } from 'date-fns';
-import { Link } from 'react-router';
-import ApplicationDetails from '../ApplicationDetails/ApplicationDetails';
-import Swal from 'sweetalert2';
+import { useForm } from 'react-hook-form';
 
-const PendingApplications = () => {
+const AllLoanApplicationAdmin = () => {
 
-    const { user, loading } = useAuth();
+    const { loading } = useAuth();
     const axiosSecure = useAxiosSecure();
 
-
-    const { data: loans = [], isLoading, refetch } = useQuery({
-        queryKey: ['pending-applications', user?.email],
+    const { data: loans = [], isLoading } = useQuery({
+        queryKey: ['all-applications'],
         queryFn: async () => {
-            const result = await axiosSecure('/applications?status=pending')
+            const result = await axiosSecure(`/applications`)
             return result.data;
         }
     });
 
-    const handleUpdateStatus = (status, id) => {
-        Swal.fire({
-            title: `Are you sure you want to mark the application as ${status}?`,
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                console.log('btn clk-->', status);
-                const update = { 
-                    status: status,
-                    updatedBy: user?.email,
-                 };
-                axiosSecure.patch(`/applications/${id}`, update)
-                    .then(() => {
-                        refetch();
-                        Swal.fire({
-                            title: "Done..!",
-                            text: `The application has been ${status}..!`,
-                            icon: "success"
-                        });
-                    })
-            }
-        });
-    }
 
     if (loading || isLoading) return <LoadingSpinner></LoadingSpinner>
     return (
         <div>
-            <h3 className="text-lg font-semibold p-3">Pending Loan Applications: {loans.length}</h3>
+            <h3 className="font-semibold text-lg p-3">All Loan Applications: {loans.length}</h3>
 
             {/* for tab and large devices */}
             <div>
@@ -64,7 +35,9 @@ const PendingApplications = () => {
                             <tr>
                                 <th>Loan ID</th>
                                 <th>User Info</th>
+                                <th>Category</th>
                                 <th>Amount</th>
+                                <th>Status</th>
                                 <th>Apply Date</th>
                                 <th>Actions</th>
                             </tr>
@@ -88,11 +61,19 @@ const PendingApplications = () => {
                                         <p>Email: {loan.borrowerEmail}</p>
                                     </td>
 
+                                    {/* category */}
+                                    <td>{loan.category}</td>
+
                                     {/* Amount */}
                                     <td>
                                         <p>Requested Amount: {loan.requestedAmount}</p>
                                         <p>Max Amount: {loan.maxLimit}</p>
                                         <p>Application Fee: {loan.applicationFee}</p>
+                                    </td>
+
+                                    {/* status */}
+                                    <td>
+                                        <span className='badge badge-info font-semibold text-white'>{loan.status}</span>
                                     </td>
 
                                     {/* Date */}
@@ -102,16 +83,14 @@ const PendingApplications = () => {
 
                                     {/* ACTIONS */}
                                     <td className="flex gap-2">
-                                        <div className='flex flex-col lg:flex-row gap-3'>
-                                            <button
-                                                onClick={() => handleUpdateStatus('approved', loan._id)}
-                                                className='btn btn-sm btn-primary'>Approve</button>
-                                            <button
-                                                onClick={() => handleUpdateStatus('rejected', loan._id)}
-                                                className='btn btn-sm btn-error'>Reject</button>
-                                            <Link to={`/dashboard/application/${loan._id}`}
-                                                className='btn btn-sm btn-info text-white'>View</Link>
-                                        </div>
+
+
+                                        <Link
+                                            to={`/dashboard/application/${loan._id}`}
+                                            className='btn btn-sm btn-info text-white'>
+                                            View
+                                        </Link>
+
                                     </td>
                                 </tr>
                             ))}
@@ -145,22 +124,19 @@ const PendingApplications = () => {
                                             <p>Application Fee: {loan.applicationFee}</p>
                                             <p>Requested Amount: {loan.requestedAmount}</p>
                                             <p>Max Amount: {loan.maxLimit}</p>
+                                            <p>Category: {loan.category}</p>
+                                            <p>Status: <span className='badge badge-info font-semibold text-white'>{loan.status}</span></p>
                                             <p>Apply Date: {format(new Date(loan.appliedAt), 'd MMM, yyyy h:mma')}</p>
                                         </div>
                                     </td>
 
                                     {/* ACTIONS */}
                                     <td className="flex gap-2">
-                                        <div className='flex flex-col gap-3'>
-                                            <button
-                                                onClick={() => handleUpdateStatus('approved', loan._id)}
-                                                className='btn btn-sm btn-primary'>Approve</button>
-                                            <button
-                                                onClick={() => handleUpdateStatus('rejected', loan._id)}
-                                                className='btn btn-sm btn-error'>Reject</button>
-                                            <Link to={`/dashboard/application/${loan._id}`}
-                                                className='btn btn-sm btn-info text-white'>View</Link>
-                                        </div>
+                                        <Link
+                                            to={`/dashboard/application/${loan._id}`}
+                                            className='btn btn-sm btn-info text-white'>
+                                            View
+                                        </Link>
                                     </td>
                                 </tr>
                             ))}
@@ -172,4 +148,4 @@ const PendingApplications = () => {
     );
 };
 
-export default PendingApplications;
+export default AllLoanApplicationAdmin;

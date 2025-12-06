@@ -11,6 +11,23 @@ const SignUp = () => {
   const location = useLocation()
   const from = location.state || '/'
 
+  const validatePassword = (password) => {
+    const hasUppercase = /[A-Z]/.test(password)
+    const hasLowercase = /[a-z]/.test(password)
+    const hasMinLength = password.length >= 6
+
+    if (!hasMinLength) {
+      return 'Password must be at least 6 characters'
+    }
+    if (!hasUppercase) {
+      return 'Password must contain at least one uppercase letter'
+    }
+    if (!hasLowercase) {
+      return 'Password must contain at least one lowercase letter'
+    }
+    return null
+  }
+
   // form submit handler
   const handleSubmit = async event => {
     event.preventDefault()
@@ -19,6 +36,12 @@ const SignUp = () => {
     const email = form.email.value
     const password = form.password.value
     const photoURL = form.photoURL.value
+
+    const passwordError = validatePassword(password)
+    if (passwordError) {
+      toast.error(passwordError)
+      return
+    }
 
     try {
       //2. User Registration
@@ -93,7 +116,7 @@ const SignUp = () => {
                 htmlFor='image'
                 className='block mb-2 text-sm font-medium text-gray-700'
               >
-                Profile Image
+                Profile Image URL
               </label>
               <input
                 type='text'

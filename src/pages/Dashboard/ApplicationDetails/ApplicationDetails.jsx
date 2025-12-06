@@ -8,12 +8,14 @@ import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import LoadingSpinner from '../../../components/Shared/LoadingSpinner';
 import Swal from 'sweetalert2';
 import useAuth from '../../../hooks/useAuth';
+import useRole from '../../../hooks/useRole';
 
 const ApplicationDetails = () => {
 
     const { id } = useParams();
     const axiosSecure = useAxiosSecure();
-    const {user} = useAuth();
+    const {user, loading} = useAuth();
+    const [role, isRoleLoading] = useRole();
 
     const { data: applicationData = {}, isLoading, refetch } = useQuery({
         queryKey: ['application', id],
@@ -51,7 +53,7 @@ const ApplicationDetails = () => {
         });
     }
 
-    if (isLoading) return <LoadingSpinner></LoadingSpinner>
+    if (isLoading || isRoleLoading || loading) return <LoadingSpinner></LoadingSpinner>
     return (
         <div className="flex justify-center items-center p-4">
             <div className="card w-full max-w-lg bg-base-100 shadow-xl">
@@ -85,7 +87,7 @@ const ApplicationDetails = () => {
                     </div>
 
                     {
-                        applicationData.status === 'pending' &&
+                        applicationData.status === 'pending' && role === 'manager' &&
                         <div className="card-actions justify-end mt-4">
                             <button 
                             onClick={() => handleUpdateStatus('approved', applicationData._id)}

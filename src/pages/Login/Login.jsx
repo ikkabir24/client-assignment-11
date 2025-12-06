@@ -16,12 +16,36 @@ const Login = () => {
   if (loading) return <LoadingSpinner />
   if (user) return <Navigate to={from} replace={true} />
 
+  const validatePassword = (password) => {
+    const hasUppercase = /[A-Z]/.test(password)
+    const hasLowercase = /[a-z]/.test(password)
+    const hasMinLength = password.length >= 6
+
+    if (!hasMinLength) {
+      return 'Password must be at least 6 characters'
+    }
+    if (!hasUppercase) {
+      return 'Password must contain at least one uppercase letter'
+    }
+    if (!hasLowercase) {
+      return 'Password must contain at least one lowercase letter'
+    }
+    return null
+  }
+
+
   // form submit handler
   const handleSubmit = async event => {
     event.preventDefault()
     const form = event.target
     const email = form.email.value
     const password = form.password.value
+
+    const passwordError = validatePassword(password)
+    if (passwordError) {
+      toast.error(passwordError)
+      return
+    }
 
     try {
       //User Login
@@ -32,7 +56,7 @@ const Login = () => {
         email: user?.email,
         image: user?.photoURL
       })
-      
+
       navigate(from, { replace: true })
       toast.success('Login Successful')
     } catch (err) {

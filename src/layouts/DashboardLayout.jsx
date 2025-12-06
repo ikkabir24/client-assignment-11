@@ -8,6 +8,7 @@ import { MdHistoryEdu } from "react-icons/md";
 import LoadingSpinner from '../components/Shared/LoadingSpinner';
 import { FaUsersGear } from "react-icons/fa6";
 import { SlDocs } from "react-icons/sl";
+import { HiViewGridAdd } from "react-icons/hi";
 
 const DashboardLayout = () => {
 
@@ -125,6 +126,15 @@ const DashboardLayout = () => {
                 <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" to={'/dashboard/all-loan'} data-tip="All Loans">
                   <SlDocs className='my-1.5 inline-block size-4' />
                   <span className="is-drawer-close:hidden">All Loans</span>
+                </NavLink>
+              </li>
+            }
+            {
+              role === 'admin' &&
+              <li>
+                <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right" to={'/dashboard/loan-applications'} data-tip="All Loan Applications">
+                  <HiViewGridAdd className='my-1.5 inline-block size-4' />
+                  <span className="is-drawer-close:hidden">All Loan Applications</span>
                 </NavLink>
               </li>
             }
