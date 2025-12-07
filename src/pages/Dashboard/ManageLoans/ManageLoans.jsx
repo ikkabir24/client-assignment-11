@@ -33,7 +33,6 @@ const ManageLoans = () => {
 
                 axiosSecure.delete(`/delete-loan/${id}`)
                     .then(res => {
-                        console.log(res);
                         refetch()
                         Swal.fire({
                             title: "Loan Scheme deleted..!",
@@ -55,7 +54,7 @@ const ManageLoans = () => {
             <div>
                 <div className="overflow-x-auto w-full">
                     <table className="table table-zebra w-full">
-                        {/* TABLE HEAD */}
+             
                         <thead className="bg-base-200">
                             <tr>
                                 <th>Loan Info</th>
@@ -64,11 +63,11 @@ const ManageLoans = () => {
                             </tr>
                         </thead>
 
-                        {/* TABLE BODY */}
+                 
                         <tbody>
                             {loans.map((loan) => (
                                 <tr key={loan._id}>
-                                    {/* LOAN INFO */}
+                               
                                     <td>
                                         <div className='flex gap-3 items-center'>
                                             <div>
@@ -81,12 +80,12 @@ const ManageLoans = () => {
                                         </div>
                                     </td>
 
-                                    {/* FEE STATUS */}
+                              
                                     <td>
                                         {loan.category}
                                     </td>
 
-                                    {/* ACTIONS */}
+                              
                                     <td className="flex gap-2">
                                         <div className='flex flex-col md:flex-row gap-3'>
                                             <Link to={`/dashboard/update-loan/${loan._id}`} className='btn btn-sm btn-primary'>Update</Link>

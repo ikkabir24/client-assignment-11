@@ -1,32 +1,37 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Link, useParams } from 'react-router';
-import axios from 'axios';
 import LoadingSpinner from '../../components/Shared/LoadingSpinner';
+import useRole from '../../hooks/useRole';
+import useAuth from '../../hooks/useAuth';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
 
 const LoanDetails = () => {
 
-    const {id} = useParams();
+    const { id } = useParams();
+    const [role, isRoleLoading] = useRole();
+    const {user, loading} = useAuth();
+    const axiosSecure = useAxiosSecure();
 
-    const {data: loan = {}, isLoading} = useQuery({
+    const { data: loan = {}, isLoading } = useQuery({
         queryKey: ['loan', id],
-        queryFn: async ()=>{
-            const result = await axios(`${import.meta.env.VITE_API_URL}/loan/${id}`)
+        queryFn: async () => {
+            const result = await axiosSecure(`/loan/${id}`)
             return result.data;
         }
     })
 
-    if(isLoading) return <LoadingSpinner></LoadingSpinner>
+    if (isLoading || isRoleLoading || loading) return <LoadingSpinner></LoadingSpinner>
     return (
         <div className="max-w-6xl mx-auto p-6">
-            {/* PAGE TITLE */}
+
             <h1 className="text-3xl font-semibold mb-6">
                 Loan Details
             </h1>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
 
-                {/* IMAGE SECTION */}
+
                 <div className="w-full h-80 rounded-xl overflow-hidden shadow-lg">
                     <img
                         src={loan.imageURL}
@@ -35,11 +40,11 @@ const LoanDetails = () => {
                     />
                 </div>
 
-                {/* DETAILS */}
+
                 <div className="space-y-5 p-4 lg:p-0">
                     <h2 className="text-3xl font-bold">{loan.title}</h2>
 
-                    {/* CATEGORY + INTEREST */}
+
                     <div className="flex items-center gap-4">
                         <span className="px-4 py-1 rounded-full bg-primary/10 text-primary font-medium text-sm">
                             {loan.category}
@@ -49,46 +54,45 @@ const LoanDetails = () => {
                         </span>
                     </div>
 
-                    {/* MAX LIMIT */}
+
                     <p className="text-lg">
                         <span className="font-semibold">Max Loan Limit:</span>{" "}
                         ${loan.maxLimit}
                     </p>
 
-                    {/* DESCRIPTION */}
-                    <p className="text-gray-700 leading-relaxed">
+                    <p className="leading-relaxed">
                         {loan.description}
                     </p>
 
-                    {/* REQUIRED DOCUMENTS */}
                     <div>
                         <h3 className="font-semibold text-lg">Required Documents:</h3>
-                        <ul className="list-disc ml-6 text-gray-700">
+                        <ul className="list-disc ml-6">
                             {loan.requiredDocuments}
                         </ul>
                     </div>
 
-                    {/* EMI PLANS */}
                     <div>
                         <h3 className="font-semibold text-lg">Available EMI Plans:</h3>
                         <div className="flex flex-wrap gap-3 mt-2">
                             {loan.emiPlans} month
                         </div>
                     </div>
+                    {
+                        user && role === 'borrower' &&
+                        <div className="pt-3">
+                            <Link to={`/apply/${loan._id}`} className="btn btn-primary w-full">
+                                Apply Now
+                            </Link>
+                        </div>
+                    }
 
-                    {/* APPLY NOW BUTTON - only borrower (normal user) */}
-                    <div className="pt-3">
-                        <Link to={`/apply/${loan._id}`} className="btn btn-primary w-full">
-                            Apply Now
-                        </Link>
-                    </div>
                 </div>
             </div>
 
-            {/* EXTRA INFO SECTION */}
+
             <div className="mt-12 p-6 bg-base-200 rounded-xl shadow-sm">
                 <h3 className="text-xl font-bold mb-3">Important Notes</h3>
-                <p className="text-gray-700 leading-relaxed">
+                <p className="leading-relaxed">
                     Ensure that you provide accurate information and required documents.
                     The loan officer will verify your application and income details.
                     Once approved, EMI plans will be calculated based on your preferred

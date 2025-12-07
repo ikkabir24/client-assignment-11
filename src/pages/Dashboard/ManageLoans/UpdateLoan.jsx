@@ -20,7 +20,6 @@ const UpdateLoan = () => {
             return result.data;
         }
     });
-    console.log(loan);
 
     const { register, handleSubmit } = useForm({
         defaultValues: {
@@ -69,7 +68,7 @@ const UpdateLoan = () => {
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
 
-                {/* Loan Title */}
+         
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text font-medium">Loan Title</span>
@@ -82,7 +81,7 @@ const UpdateLoan = () => {
                     />
                 </div>
 
-                {/* Description */}
+           
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text font-medium">Description</span>
@@ -94,7 +93,7 @@ const UpdateLoan = () => {
                     ></textarea>
                 </div>
 
-                {/* Category & Interest Rate */}
+              
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="form-control">
                         <label className="label">
@@ -128,7 +127,7 @@ const UpdateLoan = () => {
                     </div>
                 </div>
 
-                {/* Max Loan Limit */}
+               
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text font-medium">Max Loan Limit ($)</span>
@@ -141,7 +140,7 @@ const UpdateLoan = () => {
                     />
                 </div>
 
-                {/* Required Documents */}
+         
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text font-medium">Required Documents</span>
@@ -154,7 +153,7 @@ const UpdateLoan = () => {
                     />
                 </div>
 
-                {/* EMI Plans */}
+      
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text font-medium">EMI Plans</span>
@@ -167,7 +166,7 @@ const UpdateLoan = () => {
                     />
                 </div>
 
-                {/* Image Upload */}
+            
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text font-medium">Loan Image URL</span>
@@ -181,7 +180,7 @@ const UpdateLoan = () => {
                     />
                 </div>
 
-                {/* Show on Home Toggle */}
+        
                 <div className="form-control">
                     <label className="label cursor-pointer">
                         <span className="label-text font-medium">Show on Home Page</span>
@@ -193,7 +192,7 @@ const UpdateLoan = () => {
                     </label>
                 </div>
 
-                {/* Submit Button */}
+         
                 <button
                     type="submit"
                     className="btn btn-primary w-full text-lg"

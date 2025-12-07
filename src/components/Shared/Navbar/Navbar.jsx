@@ -8,16 +8,17 @@ import logo from '../../../assets/images/logo-flat.png'
 const Navbar = () => {
   const { user, logOut } = useAuth()
   const [isOpen, setIsOpen] = useState(false)
-  const [theme, setTheme] = useState(localStorage.getItem('theme'))
+  const [theme, setTheme] = useState(localStorage.getItem("theme") ? localStorage.getItem("theme") : "light")
 
   useEffect(() => {
-    const html = document.querySelector('html');
-    html.setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme)
+    const localTheme = localStorage.getItem("theme")
+    const html = document.querySelector('html');
+    html.setAttribute("data-theme", localTheme);
   }, [theme])
 
   const handleTheme = (checked) => {
-    setTheme(checked ? 'dark' : 'light')
+    setTheme(checked ? "dark" : "light")
   }
 
   return (

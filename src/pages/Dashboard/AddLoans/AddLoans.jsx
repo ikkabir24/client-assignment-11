@@ -10,7 +10,6 @@ const AddLoans = () => {
     const axiosSecure = useAxiosSecure();
 
     const onSubmit = async (data) => {
-        console.log(data);
         data.createdBy = user?.email;
 
         Swal.fire({
@@ -25,7 +24,6 @@ const AddLoans = () => {
                 // save the loan package in the db
                 axiosSecure.post('/add-loan', data)
                     .then(res => {
-                        console.log(res.data);
                         reset();
                         Swal.fire({
                             title: "Created Successfully..!",
@@ -45,7 +43,7 @@ const AddLoans = () => {
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
 
-                {/* Loan Title */}
+           
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text font-medium">Loan Title</span>
@@ -58,7 +56,7 @@ const AddLoans = () => {
                     />
                 </div>
 
-                {/* Description */}
+            
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text font-medium">Description</span>
@@ -70,7 +68,7 @@ const AddLoans = () => {
                     ></textarea>
                 </div>
 
-                {/* Category & Interest Rate */}
+            
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="form-control">
                         <label className="label">
@@ -104,7 +102,7 @@ const AddLoans = () => {
                     </div>
                 </div>
 
-                {/* Max Loan Limit */}
+               
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text font-medium">Max Loan Limit ($)</span>
@@ -117,7 +115,7 @@ const AddLoans = () => {
                     />
                 </div>
 
-                {/* Required Documents */}
+            
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text font-medium">Required Documents</span>
@@ -130,7 +128,7 @@ const AddLoans = () => {
                     />
                 </div>
 
-                {/* EMI Plans */}
+              
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text font-medium">EMI Plans</span>
@@ -143,7 +141,7 @@ const AddLoans = () => {
                     />
                 </div>
 
-                {/* Image Upload */}
+               
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text font-medium">Loan Image URL</span>
@@ -157,7 +155,7 @@ const AddLoans = () => {
                     />
                 </div>
 
-                {/* Show on Home Toggle */}
+            
                 <div className="form-control">
                     <label className="label cursor-pointer">
                         <span className="label-text font-medium">Show on Home Page</span>
@@ -169,7 +167,7 @@ const AddLoans = () => {
                     </label>
                 </div>
 
-                {/* Submit Button */}
+         
                 <button
                     type="submit"
                     className="btn btn-primary w-full text-lg"

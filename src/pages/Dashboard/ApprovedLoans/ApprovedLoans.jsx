@@ -29,7 +29,7 @@ const ApprovedLoans = () => {
                 {/* for tab and large devices */}
                 <div className="hidden md:block overflow-x-auto w-full">
                     <table className="table table-zebra w-full">
-                        {/* TABLE HEAD */}
+                     
                         <thead className="bg-base-200">
                             <tr>
                                 <th>Loan ID</th>
@@ -40,37 +40,37 @@ const ApprovedLoans = () => {
                             </tr>
                         </thead>
 
-                        {/* TABLE BODY */}
+                    
                         <tbody>
                             {loans.map((loan) => (
                                 <tr key={loan._id}>
 
-                                    {/* loan id */}
+                                  
                                     <td>
                                         <div className='flex gap-3 items-center'>
                                             <p>{loan.loanId}</p>
                                         </div>
                                     </td>
 
-                                    {/* user info */}
+                               
                                     <td>
                                         <p>Name: {loan.borrowerName}</p>
                                         <p>Email: {loan.borrowerEmail}</p>
                                     </td>
 
-                                    {/* Amount */}
+                               
                                     <td>
                                         <p>Requested Amount: {loan.requestedAmount}</p>
                                         <p>Max Amount: {loan.maxLimit}</p>
                                         <p>Application Fee: {loan.applicationFee}</p>
                                     </td>
 
-                                    {/* Date */}
+                         
                                     <td>
                                         <p>{format(new Date(loan.updatedAt), 'd MMM, yyyy h:mma')}</p>
                                     </td>
 
-                                    {/* ACTIONS */}
+                               
                                     <td className="flex gap-2">
                                         <div className='flex flex-col lg:flex-row gap-3'>
                                             <Link to={`/dashboard/application/${loan._id}`}
@@ -87,7 +87,7 @@ const ApprovedLoans = () => {
                 <div>
                     <div className="md:hidden overflow-x-auto w-full">
                         <table className="table table-zebra w-full">
-                            {/* TABLE HEAD */}
+                    
                             <thead className="bg-base-200">
                                 <tr>
                                     <th>Loan Info</th>
@@ -95,11 +95,11 @@ const ApprovedLoans = () => {
                                 </tr>
                             </thead>
 
-                            {/* TABLE BODY */}
+                      
                             <tbody>
                                 {loans.map((loan) => (
                                     <tr key={loan._id}>
-                                        {/* LOAN INFO */}
+                                
                                         <td>
                                             <div className=''>
                                                 <p>Loan ID: {loan.loanId}</p>
@@ -112,7 +112,7 @@ const ApprovedLoans = () => {
                                             </div>
                                         </td>
 
-                                        {/* ACTIONS */}
+                               
                                         <td className="flex gap-2">
                                             <div className='flex flex-col gap-3'>
                                                 <Link to={`/dashboard/application/${loan._id}`}

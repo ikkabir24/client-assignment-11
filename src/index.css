@@ -4,7 +4,9 @@
 }
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
-
+@import "swiper/css";
+@import "swiper/css/pagination";
+@import "swiper/css/navigation";
 
 a.active {
   background-color: gray;

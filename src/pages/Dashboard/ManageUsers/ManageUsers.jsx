@@ -48,7 +48,6 @@ const ManageUsers = () => {
 
     // role update
     const onSubmitRole = (data) => {
-        console.log('update btn clk', selectedUser._id);
         const role = {
             role: data.role,
         }
@@ -80,7 +79,7 @@ const ManageUsers = () => {
         <div>
             <h1 className="text-lg font-semibold p-3">Manage Users: {users.length}</h1>
 
-            {/* table */}
+      
             <div className="overflow-x-auto">
                 <table className="table table-zebra w-full">
                     <thead className="bg-base-200">
@@ -120,10 +119,10 @@ const ManageUsers = () => {
                 </table>
             </div>
 
-            {/* modal */}
+       
             <dialog id="manageUserModal" className="modal">
                 <div className="modal-box">
-                    {/* Role Update Modal */}
+              
                     {modalType === "role" && (
                         <form onSubmit={handleSubmit(onSubmitRole)}>
                             <h3 className="text-xl font-bold mb-4">

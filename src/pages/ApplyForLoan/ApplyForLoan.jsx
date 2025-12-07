@@ -70,7 +70,6 @@ const ApplyForLoan = () => {
                 // save the loan package in the db
                 axiosSecure.post('/applications', finalData)
                     .then(res => {
-                        console.log(res.data);
                         Swal.fire({
                             title: "Applied for a loan Successfully..!",
                             icon: "success"
@@ -88,34 +87,34 @@ const ApplyForLoan = () => {
             </h2>
 
             <form onSubmit={handleSubmit(handleApplication)} className="space-y-6">
-                {/* USER INFO */}
+             
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
-                    {/* name */}
+                 
                     <div>
                         <label className="label">
                             <span className="label-text font-semibold">Your Name</span>
                         </label>
                         <input
                             readOnly
-                            className="input input-bordered w-full bg-gray-100"
+                            className="input input-bordered w-full"
                             {...register("borrowerName")}
                         />
                     </div>
 
-                    {/* email */}
+                   
                     <div>
                         <label className="label">
                             <span className="label-text font-semibold">Your Email</span>
                         </label>
                         <input
                             readOnly
-                            className="input input-bordered w-full bg-gray-100"
+                            className="input input-bordered w-full"
                             {...register("borrowerEmail")}
                         />
                     </div>
 
-                    {/* mobile number */}
+                 
                     <div>
                         <label className="label">
                             <span className="label-text font-semibold">Your Phone Number</span>
@@ -124,45 +123,45 @@ const ApplyForLoan = () => {
                             type='tel'
                             pattern="^\+?[0-9]{1,3}?[0-9]{6,14}$"
                             placeholder="+880 1234 567890"
-                            className="input input-bordered w-full bg-gray-100"
+                            className="input input-bordered w-full"
                             {...register("borrowerPhoneNumber")}
                         />
                     </div>
 
-                    {/* Nid */}
+                  
                     <div>
                         <label className="label">
                             <span className="label-text font-semibold">Your NID Number</span>
                         </label>
                         <input
                             type='number'
-                            className="input input-bordered w-full bg-gray-100"
+                            className="input input-bordered w-full"
                             {...register("borrowerNID")}
                             placeholder='NID Number'
                         />
                     </div>
 
-                    {/* monthly income */}
+                
                     <div>
                         <label className="label">
                             <span className="label-text font-semibold">Your Monthly Income</span>
                         </label>
                         <input
                             type='number'
-                            className="input input-bordered w-full bg-gray-100"
+                            className="input input-bordered w-full"
                             {...register("income")}
                             placeholder='Monthly Income'
                         />
                     </div>
 
-                    {/* income source */}
+                  
                     <div>
                         <label className="label">
                             <span className="label-text font-semibold">Your Income Source</span>
                         </label>
                         <input
                             type='text'
-                            className="input input-bordered w-full bg-gray-100"
+                            className="input input-bordered w-full"
                             {...register("incomeSource")}
                             placeholder='Income Source'
                         />
@@ -170,20 +169,20 @@ const ApplyForLoan = () => {
 
                 </div>
 
-                {/* address */}
+            
                 <div>
                     <label className="label">
                         <span className="label-text font-semibold">Your Full Address</span>
                     </label>
                     <input
                         type='text'
-                        className="input input-bordered w-full bg-gray-100"
+                        className="input input-bordered w-full"
                         {...register("address")}
                         placeholder='Full Address'
                     />
                 </div>
 
-                {/* LOAN INFO */}
+          
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
                     <div>
@@ -192,7 +191,7 @@ const ApplyForLoan = () => {
                         </label>
                         <input
                             readOnly
-                            className="input input-bordered w-full bg-gray-100"
+                            className="input input-bordered w-full"
                             {...register("loanTitle")}
                         />
                     </div>
@@ -204,7 +203,7 @@ const ApplyForLoan = () => {
                         </label>
                         <input
                             readOnly
-                            className="input input-bordered w-full bg-gray-100"
+                            className="input input-bordered w-full"
                             {...register("loanId")}
                         />
                     </div>
@@ -213,7 +212,7 @@ const ApplyForLoan = () => {
 
                 </div>
 
-                {/* LOAN EXTRA INFO */}
+       
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
 
                     <div>
@@ -222,7 +221,7 @@ const ApplyForLoan = () => {
                         </label>
                         <input
                             readOnly
-                            className="input input-bordered w-full bg-gray-100"
+                            className="input input-bordered w-full"
                             {...register("maxLimit")}
                         />
                     </div>
@@ -233,7 +232,7 @@ const ApplyForLoan = () => {
                         </label>
                         <input
                             readOnly
-                            className="input input-bordered w-full bg-gray-100"
+                            className="input input-bordered w-full"
                             {...register("interestRate")}
                         />
                     </div>
@@ -244,14 +243,14 @@ const ApplyForLoan = () => {
                         </label>
                         <input
                             readOnly
-                            className="input input-bordered w-full bg-gray-100"
+                            className="input input-bordered w-full"
                             {...register("category")}
                         />
                     </div>
 
                 </div>
 
-                {/* REQUESTED AMOUNT */}
+      
                 <div>
                     <label className="label">
                         <span className="label-text font-semibold">Requested Amount</span>
@@ -278,7 +277,7 @@ const ApplyForLoan = () => {
                     )}
                 </div>
 
-                {/* REASON */}
+        
                 <div>
                     <label className="label">
                         <span className="label-text font-semibold">Reason for Application</span>
@@ -301,7 +300,7 @@ const ApplyForLoan = () => {
                     )}
                 </div>
 
-                {/* SUBMIT */}
+         
                 <button type="submit" className="btn btn-primary w-full">
                     Submit Application
                 </button>

@@ -76,7 +76,7 @@ const HeroBanner = () => {
                         className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
                         variants={itemVariants}
                     >
-                        {/* Primary CTA */}
+                       
                         <Link to="/all-loans">
                             <button className="btn btn-primary btn-lg w-full sm:w-auto shadow-lg hover:shadow-primary/50 transition-all duration-300">
                                 Explore Loans

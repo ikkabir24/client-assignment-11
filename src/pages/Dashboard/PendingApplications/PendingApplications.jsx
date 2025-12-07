@@ -32,7 +32,6 @@ const PendingApplications = () => {
             confirmButtonText: "Yes"
         }).then((result) => {
             if (result.isConfirmed) {
-                console.log('btn clk-->', status);
                 const update = { 
                     status: status,
                     updatedBy: user?.email,
@@ -59,7 +58,7 @@ const PendingApplications = () => {
             <div>
                 <div className="hidden md:block overflow-x-auto w-full">
                     <table className="table table-zebra w-full">
-                        {/* table head */}
+                  
                         <thead className="bg-base-200">
                             <tr>
                                 <th>Loan ID</th>
@@ -70,37 +69,37 @@ const PendingApplications = () => {
                             </tr>
                         </thead>
 
-                        {/* table body */}
+            
                         <tbody>
                             {loans.map((loan) => (
                                 <tr key={loan._id}>
 
-                                    {/* loan id */}
+                              
                                     <td>
                                         <div className='flex gap-3 items-center'>
                                             <p>{loan.loanId}</p>
                                         </div>
                                     </td>
 
-                                    {/* user info */}
+                              
                                     <td>
                                         <p>Name: {loan.borrowerName}</p>
                                         <p>Email: {loan.borrowerEmail}</p>
                                     </td>
 
-                                    {/* Amount */}
+                              
                                     <td>
                                         <p>Requested Amount: {loan.requestedAmount}</p>
                                         <p>Max Amount: {loan.maxLimit}</p>
                                         <p>Application Fee: {loan.applicationFee}</p>
                                     </td>
 
-                                    {/* Date */}
+                           
                                     <td>
                                         <p>{format(new Date(loan.appliedAt), 'd MMM, yyyy h:mma')}</p>
                                     </td>
 
-                                    {/* ACTIONS */}
+                            
                                     <td className="flex gap-2">
                                         <div className='flex flex-col lg:flex-row gap-3'>
                                             <button
@@ -124,7 +123,7 @@ const PendingApplications = () => {
             <div>
                 <div className="md:hidden overflow-x-auto w-full">
                     <table className="table table-zebra w-full">
-                        {/* TABLE HEAD */}
+             
                         <thead className="bg-base-200">
                             <tr>
                                 <th>Loan Info</th>
@@ -132,11 +131,11 @@ const PendingApplications = () => {
                             </tr>
                         </thead>
 
-                        {/* TABLE BODY */}
+          
                         <tbody>
                             {loans.map((loan) => (
                                 <tr key={loan._id}>
-                                    {/* LOAN INFO */}
+                          
                                     <td>
                                         <div className=''>
                                             <p>Loan ID: {loan.loanId}</p>
@@ -149,7 +148,7 @@ const PendingApplications = () => {
                                         </div>
                                     </td>
 
-                                    {/* ACTIONS */}
+                            
                                     <td className="flex gap-2">
                                         <div className='flex flex-col gap-3'>
                                             <button

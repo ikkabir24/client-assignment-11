@@ -22,6 +22,10 @@ import ApplicationDetails from '../pages/Dashboard/ApplicationDetails/Applicatio
 import ManageUsers from '../pages/Dashboard/ManageUsers/ManageUsers'
 import AllLoansForAdmin from '../pages/Dashboard/AllLoansForAdmin/AllLoansForAdmin'
 import AllLoanApplicationAdmin from '../pages/Dashboard/AllLoanApplicationAdmin/AllLoanApplicationAdmin'
+import PaymentSuccess from '../pages/Dashboard/Payment/PaymentSuccess'
+import PaymentCancelled from '../pages/Dashboard/Payment/PaymentCancelled'
+import ManagerRoute from './ManagerRoute'
+import AdminRoute from './AdminRoute'
 
 export const router = createBrowserRouter([
   {
@@ -70,50 +74,93 @@ export const router = createBrowserRouter([
     children: [
       {
         path: '/dashboard/user-profile',
-        Component: UserProfile
+        element: <PrivateRoute>
+          <UserProfile/>
+        </PrivateRoute>
       },
       {
         path: '/dashboard/my-loans',
-        Component: MyLoans
+        element: <PrivateRoute>
+          <MyLoans />
+        </PrivateRoute>
       },
       {
         path: '/dashboard/add-loans',
-        Component: AddLoans
+        element: <PrivateRoute>
+          <ManagerRoute>
+            <AddLoans />
+          </ManagerRoute>
+        </PrivateRoute>
       },
       {
         path: '/dashboard/manage-loans',
-        Component: ManageLoans
+        element: <PrivateRoute>
+          <ManagerRoute>
+            <ManageLoans />
+          </ManagerRoute>
+        </PrivateRoute>
       },
       {
         path: '/dashboard/update-loan/:id',
-        Component: UpdateLoan
+        element: <PrivateRoute>
+          <UpdateLoan />
+        </PrivateRoute>
       },
       {
         path: '/dashboard/pending-loans',
-        Component: PendingApplications
+        element: <PrivateRoute>
+          <ManagerRoute>
+            <PendingApplications />
+          </ManagerRoute>
+        </PrivateRoute>
       },
       {
         path: '/dashboard/application/:id',
-        Component: ApplicationDetails
+        element: <PrivateRoute>
+          <ApplicationDetails />
+        </PrivateRoute>
       },
       {
         path: '/dashboard/approved-loans',
-        Component: ApprovedLoans
+        element: <PrivateRoute>
+          <ManagerRoute>
+            <ApprovedLoans />
+          </ManagerRoute>
+        </PrivateRoute>
       },
-      // admin routes
       {
         path: '/dashboard/manage-users',
-        Component: ManageUsers
+        element: <PrivateRoute>
+          <AdminRoute>
+            <ManageUsers />
+          </AdminRoute>
+        </PrivateRoute>
       },
       {
         path: '/dashboard/all-loan',
-        Component: AllLoansForAdmin
+        element: <PrivateRoute>
+          <AdminRoute>
+            <AllLoansForAdmin />
+          </AdminRoute>
+        </PrivateRoute>
       },
       {
         path: '/dashboard/loan-applications',
-        Component: AllLoanApplicationAdmin
+        element: <PrivateRoute>
+          <AdminRoute>
+            <AllLoanApplicationAdmin />
+          </AdminRoute>
+        </PrivateRoute>
       },
-      
+      {
+        path: '/dashboard/payment-success',
+        Component: PaymentSuccess
+      },
+      {
+        path: '/dashboard/payment-cancelled',
+        Component: PaymentCancelled
+      },
+
     ],
   },
 ])

@@ -31,8 +31,7 @@ const AllLoansForAdmin = () => {
             if (result.isConfirmed) {
 
                 axiosSecure.delete(`/delete-loan/${id}`)
-                    .then(res => {
-                        console.log(res);
+                    .then(() => {
                         refetch()
                         Swal.fire({
                             title: "Loan Scheme deleted..!",
@@ -47,7 +46,6 @@ const AllLoansForAdmin = () => {
     }
 
     const handleShowOnHome = (id) => {
-        console.log(id, showOnHomePage);
         const update = {
             showOnHome: showOnHomePage
         }
@@ -67,11 +65,11 @@ const AllLoansForAdmin = () => {
     return (
         <div>
             <h3 className="text-lg font-semibold p-3">All Loans: {loans.length}</h3>
-
+            <p className='text-red-600 font-semibold pb-3 px-3'>Only the latest 6 selected will be displayed on Homepage</p>
             <div>
                 <div className="overflow-x-auto w-full">
                     <table className="table table-zebra w-full">
-                        {/* TABLE HEAD */}
+                      
                         <thead className="bg-base-200">
                             <tr>
                                 <th>Loan Info</th>
@@ -82,11 +80,11 @@ const AllLoansForAdmin = () => {
                             </tr>
                         </thead>
 
-                        {/* TABLE BODY */}
+                      
                         <tbody>
                             {loans.map((loan) => (
                                 <tr key={loan._id}>
-                                    {/* LOAN INFO */}
+                                   
                                     <td>
                                         <div className='flex gap-3 items-center'>
                                             <div>
@@ -101,17 +99,17 @@ const AllLoansForAdmin = () => {
                                         </div>
                                     </td>
 
-                                    {/* FEE STATUS */}
+                                 
                                     <td className='hidden md:table-cell'>
                                         {loan.category}
                                     </td>
 
-                                    {/* created by */}
+                                  
                                     <td className='hidden md:table-cell'>
                                         {loan.createdBy}
                                     </td>
 
-                                    {/* show on home */}
+                                  
                                     <td className='hidden md:table-cell'>
                                         <div className="form-control">
                                             <input
@@ -123,7 +121,7 @@ const AllLoansForAdmin = () => {
                                         </div>
                                     </td>
 
-                                    {/* ACTIONS */}
+                                
                                     <td>
                                         <div className='flex flex-col md:flex-row gap-3'>
                                             <Link to={`/dashboard/update-loan/${loan._id}`} className='btn btn-sm btn-primary'>Update</Link>

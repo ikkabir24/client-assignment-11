@@ -1,11 +1,10 @@
 import { format } from 'date-fns';
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router';
 import LoadingSpinner from '../../../components/Shared/LoadingSpinner';
 import useAuth from '../../../hooks/useAuth';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
-import { useForm } from 'react-hook-form';
 
 const AllLoanApplicationAdmin = () => {
 
@@ -30,7 +29,7 @@ const AllLoanApplicationAdmin = () => {
             <div>
                 <div className="hidden md:block overflow-x-auto w-full">
                     <table className="table table-zebra w-full">
-                        {/* table head */}
+                
                         <thead className="bg-base-200">
                             <tr>
                                 <th>Loan ID</th>
@@ -43,45 +42,45 @@ const AllLoanApplicationAdmin = () => {
                             </tr>
                         </thead>
 
-                        {/* table body */}
+                 
                         <tbody>
                             {loans.map((loan) => (
                                 <tr key={loan._id}>
 
-                                    {/* loan id */}
+                               
                                     <td>
                                         <div className='flex gap-3 items-center'>
                                             <p>{loan.loanId}</p>
                                         </div>
                                     </td>
 
-                                    {/* user info */}
+                                    
                                     <td>
                                         <p>Name: {loan.borrowerName}</p>
                                         <p>Email: {loan.borrowerEmail}</p>
                                     </td>
 
-                                    {/* category */}
+                        
                                     <td>{loan.category}</td>
 
-                                    {/* Amount */}
+                                  
                                     <td>
                                         <p>Requested Amount: {loan.requestedAmount}</p>
                                         <p>Max Amount: {loan.maxLimit}</p>
                                         <p>Application Fee: {loan.applicationFee}</p>
                                     </td>
 
-                                    {/* status */}
+                               
                                     <td>
                                         <span className='badge badge-info font-semibold text-white'>{loan.status}</span>
                                     </td>
 
-                                    {/* Date */}
+                                  
                                     <td>
                                         <p>{format(new Date(loan.appliedAt), 'd MMM, yyyy h:mma')}</p>
                                     </td>
 
-                                    {/* ACTIONS */}
+                               
                                     <td className="flex gap-2">
 
 
@@ -103,7 +102,7 @@ const AllLoanApplicationAdmin = () => {
             <div>
                 <div className="md:hidden overflow-x-auto w-full">
                     <table className="table table-zebra w-full">
-                        {/* TABLE HEAD */}
+                     
                         <thead className="bg-base-200">
                             <tr>
                                 <th>Loan Info</th>
@@ -111,11 +110,11 @@ const AllLoanApplicationAdmin = () => {
                             </tr>
                         </thead>
 
-                        {/* TABLE BODY */}
+                      
                         <tbody>
                             {loans.map((loan) => (
                                 <tr key={loan._id}>
-                                    {/* LOAN INFO */}
+                                
                                     <td>
                                         <div className=''>
                                             <p>Loan ID: {loan.loanId}</p>
@@ -130,7 +129,7 @@ const AllLoanApplicationAdmin = () => {
                                         </div>
                                     </td>
 
-                                    {/* ACTIONS */}
+                               
                                     <td className="flex gap-2">
                                         <Link
                                             to={`/dashboard/application/${loan._id}`}

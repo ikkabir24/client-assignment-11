@@ -14,8 +14,6 @@ const AllLoans = () => {
         }
     })
 
-    console.log(loans);
-
     if (isLoading) return <LoadingSpinner></LoadingSpinner>
     return (
         <div>

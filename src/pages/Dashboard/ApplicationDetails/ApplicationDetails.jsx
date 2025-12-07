@@ -35,7 +35,6 @@ const ApplicationDetails = () => {
             confirmButtonText: "Yes"
         }).then((result) => {
             if (result.isConfirmed) {
-                console.log('btn clk-->', status);
                 const update = { 
                     status: status,
                     updatedBy: user?.email,

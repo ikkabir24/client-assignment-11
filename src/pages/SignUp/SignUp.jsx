@@ -54,12 +54,10 @@ const SignUp = () => {
         name,
         photoURL
       )
-      console.log(result)
 
       navigate(from, { replace: true })
       toast.success('Signup Successful')
     } catch (err) {
-      console.log(err)
       toast.error(err?.message)
     }
   }
@@ -79,7 +77,6 @@ const SignUp = () => {
       navigate(from, { replace: true })
       toast.success('Signup Successful')
     } catch (err) {
-      console.log(err)
       toast.error(err?.message)
     }
   }
@@ -110,7 +107,7 @@ const SignUp = () => {
                 data-temp-mail-org='0'
               />
             </div>
-            {/* Image */}
+     
             <div>
               <label
                 htmlFor='image'
