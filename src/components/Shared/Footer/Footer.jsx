@@ -12,7 +12,7 @@ const Footer = () => {
         <Link to='/'>
           <img src={logo} alt='logo' width='200' />
         </Link>
-        <p className='w-100 text-justify'>LoanLink is a comprehensive microloan management system dedicated to modernizing how NGOs and small financial organizations operate. We replace the chaos of manual paperwork with a unified digital dashboard. Whether you are a borrower looking for quick funds or a manager overseeing disbursements and EMI schedules, LoanLink ensures a secure, fast, and transparent lending experience.</p><br />
+        <p className='container md:w-100 text-justify'>LoanLink is a comprehensive microloan management system dedicated to modernizing how NGOs and small financial organizations operate. We replace the chaos of manual paperwork with a unified digital dashboard. Whether you are a borrower looking for quick funds or a manager overseeing disbursements and EMI schedules, LoanLink ensures a secure, fast, and transparent lending experience.</p><br />
         <p>© Designed and Developed by Kabir. All rights reserved.</p>
       </aside>
       <nav>
