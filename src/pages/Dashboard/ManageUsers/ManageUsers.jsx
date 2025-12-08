@@ -84,9 +84,12 @@ const ManageUsers = () => {
                 <table className="table table-zebra w-full">
                     <thead className="bg-base-200">
                         <tr>
-                            <th>Name <span className='md:hidden'>& Email</span></th>
+                            <th>
+                                <span className='hidden md:inline'>Name</span>
+                                <span className='md:hidden'>User Info</span>
+                            </th>
                             <th className='hidden md:table-cell'>Email</th>
-                            <th>Current Role</th>
+                            <th className='hidden md:table-cell'>Current Role</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -97,11 +100,14 @@ const ManageUsers = () => {
                                 <td>
                                     <div className="font-semibold">{user.name}</div>
                                     <p className='block md:hidden'>{user.email}</p>
+                                    <span className="block md:hidden">
+                                        <span className="badge badge-primary">{user.role}</span>
+                                    </span>
                                 </td>
 
                                 <td className='hidden md:table-cell'>{user.email}</td>
 
-                                <td>
+                                <td className='hidden md:table-cell'>
                                     <span className="badge badge-primary">{user.role}</span>
                                 </td>
 
