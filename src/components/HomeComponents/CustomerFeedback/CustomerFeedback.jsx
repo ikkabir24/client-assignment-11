@@ -73,7 +73,7 @@ const CustomerFeedback = () => {
                                 viewport={{ once: true }}
                                 className="bg-base-200 p-6 rounded-xl shadow-md hover:shadow-xl transition-all"
                             >
-                                <div className="h-52 w-80 flex flex-col items-center text-center">
+                                <div className="card h-52 flex flex-col items-center justify-center text-center">
                                     <img
                                         src={fb.image}
                                         alt={fb.name}
