@@ -16,7 +16,7 @@ const MyLoans = () => {
     const { data: loans = [], refetch, isLoading } = useQuery({
         queryKey: ['myLoans', user?.email],
         queryFn: async () => {
-            const result = await axiosSecure('/applications')
+            const result = await axiosSecure(`/applications?email=${user?.email}`)
             return result.data;
         }
     });
